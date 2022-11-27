@@ -1,0 +1,10 @@
+
+---
+- hosts: localhost
+  tasks:
+      - name: start container
+        command: docker compose -f '{{ playbook_dir  }}'/wordpress/docker-compose.yml up -d
+        register: startcont
+      - name: Show Container
+        debug:
+           msg: '{{ startcont }}'
