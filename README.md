@@ -34,7 +34,7 @@ the docker-compose.yml file with the wordpress directory, and within the bash sc
 First clone the repo
 
 ```
-git clone https://github.com/<Your User>/Wordpress-locally.git
+git clone https://github.com/DanteB918/Wordpress-locally.git
 ```
 
 cd into the directory
