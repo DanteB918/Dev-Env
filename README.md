@@ -52,6 +52,8 @@ chmod +x gui.sh
 ```
 This will make the scripts executable.
 
+Please have docker installed already, if not please find the docs and install it. this script 
+will only install Yad and Ansible. 
 To install all the needed packages simply run the .install.sh command like so,
 ```
 ./install.sh
