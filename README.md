@@ -12,6 +12,12 @@ This script will allow you to run wordpress locally and easily access it. Once t
 it will give you a GUI made with Yad, you may start/restart containers I.E compose down and then compose up. 
 You can check container logs, which will show in the command line, and all the refresh requests & etc. will appear once you compose down the containers. 
 
+Basically, once the script is initiated, it will give you that GUI, and once you press on a button, it will trigger a bash script which will trigger an ansible script which will start the containers. the ansible scripts are hidden so there's less to look at in the command line. but using
+```
+ls -a
+```
+You should be able to see them.
+
 ## Changing ports
 
 Within the script there is this portion
