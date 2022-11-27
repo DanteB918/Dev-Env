@@ -16,6 +16,7 @@ if [[ $(ss -tulpn | grep 5080) ]];then
 			exit
 		fi
 	echo -e "\nSuccessfully composed down containers. now re-composing."
+	$(rm log.txt)
 fi
 
 $(ANSIBLE_LOCALHOST_WARNING=false ansible-playbook .wordpress.yml | yad --title="Composing up..." --progress --pu
@@ -38,7 +39,7 @@ lsate --timeout=10)
                      
                      
                         echo -e "\nSuccessfully composed down containers."
-                       
+                       $(rm log.txt)
                      else
                      $(yad --title="Decomposing" --text="No containers to decompose on port 5080")
                         echo "No containers to decompose on port 5080"
@@ -53,8 +54,9 @@ click_three(){
 
 }
 click_four(){
-   logs=$(docker logs -f wordpress-wordpress-1)
-   yad --title="CONTAINER LOGS:" --button="GET LOGS":"$logs" --text="$logs"
+   logs=$(docker logs  wordpress-wordpress-1 &> log.txt)
+   log=$(cat log.txt)
+   yad --title="CONTAINER LOGS:" --button="GET LOGS":"$logs" --text="$log"
 }
 
 export -f click_one click_two click_three click_four
