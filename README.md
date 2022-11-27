@@ -2,6 +2,10 @@
 
 Bash script for running wordpress site locally.
 
+With a GUI that looks like this!
+![image](https://user-images.githubusercontent.com/100642899/204152751-2c350f10-a509-451c-a982-ea35a5e09539.png)
+
+
 ## What it does
 
 This script will allow you to run wordpress locally and easily access it. Once the bash script has started
@@ -13,7 +17,7 @@ You can check container logs, which will show in the command line, and all the r
 Within the script there is this portion
 
 ```
-$(sudo ss -tulpn | grep 5080)
+$(ss -tulpn | grep 5080)
 ```
 which checks to see if port 5080 is allocated.
 if you'd like to run your sites locally from a different port, change 5080 to that port, this will also need to be changed in the hidden ansible scripts, 
