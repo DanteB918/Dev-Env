@@ -10,17 +10,16 @@ NC='\033[0m' # No Color
 if [[ $(ss -tulpn | grep 5080) ]];then
         echo "Port 5080 is already allocated. Attempting to decompose the wordpress site on the port."
         echo -e "\n Decomposing.."
-        $(ANSIBLE_LOCALHOST_WARNING=false ansible-playbook .dewordpress.yml)
+        $(ANSIBLE_LOCALHOST_WARNING=false ansible-playbook .dewordpress.yml | yad --title="Decomposing" --progress --pulsate --auto-close)
                 if [[ $(ss -tulpn | grep 5080) ]];then #See if port 5080 is allocated
                         echo "PORT IS STILL ALLOCATED, please close containers from something else"
                         
                 fi
         echo -e "\nSuccessfully composed down containers. now re-composing."
-        $(rm log.txt)
+     
 fi
 
-$(ANSIBLE_LOCALHOST_WARNING=false ansible-playbook .wordpress.yml | yad --title="Composing up..." --progress --pu
-lsate --timeout=10s)
+$(ANSIBLE_LOCALHOST_WARNING=false ansible-playbook .wordpress.yml | yad --title="Composing up..." --progress --pulsate --auto-close)
 
 
 echo -e "Site created\n\n Here are your container names.\n"
@@ -34,19 +33,18 @@ click_two(){ #Stop WP
         echo -e "\n Decomposing.."
 
                         if [[ $(ss -tulpn | grep 5080) ]];then #See if port 5080 is allocated
-                        $(ANSIBLE_LOCALHOST_WARNING=false ansible-playbook .dewordpress.yml | yad --title="Decomposing" --progress --pu
-lsate --timeout=10)
+                        $(ANSIBLE_LOCALHOST_WARNING=false ansible-playbook .dewordpress.yml | yad --title="Decomposing" --progress --pulsate --auto-close)
 
 
                         echo -e "\nSuccessfully composed down containers."
-                       $(rm log.txt)
+                      
                      else
                      $(yad --title="Decomposing" --text="No containers to decompose on port 5080")
                         echo "No containers to decompose on port 5080"
 
                         fi
 
-   exit 0
+   exit
 }
 click_three(){ # Show All Running containers
    contz=$(docker ps)
@@ -54,14 +52,15 @@ click_three(){ # Show All Running containers
 
 }
 click_four(){ #Get Container logs
-   logs=$(docker logs  wordpress-wordpress-1 &> log.txt)
+   logs=$(docker logs  wordpress-wordpress-1 &> log.txt) # Saving docker logs for container to log.txt
    log=$(cat log.txt)
-   yad --title="CONTAINER LOGS:" --height=500 --button="GET LOGS":"$logs" --text="$log"
+   yad --title="CONTAINER LOGS:" --height=500 --button="GET LOGS":"bash -c click_four" --text="$log"
+   $(rm log.txt) # Removing log.txt so if they get container logs, it will only show the new.
 }
 
 export -f click_one click_two click_three click_four
 
 
 #The GUI:
-yad --text-align=center --center --title="Local Wordpress Setup" --text="\nLocal environment set-up. Choose your option.\n For more info, see the terminal.\n" \
+yad --text-align="center" --center --title="Local Wordpress Setup" --text="\nLocal environment set-up. Choose your option.\n For more info, see the terminal.\n" \
 --button="Start/Restart!wordpress-icon.png":"bash -c click_one" --button="Stop!wordpress-icon.png":"bash -c click_two" --button="Show all Containers!docker.png":"bash -c click_three" --button="Container Logs!docker.png":"bash -c click_four"  --window-icon="gtk"
