@@ -13,7 +13,7 @@ if [[ $(ss -tulpn | grep 5080) ]];then
         $(ANSIBLE_LOCALHOST_WARNING=false ansible-playbook .dewordpress.yml)
                 if [[ $(ss -tulpn | grep 5080) ]];then #See if port 5080 is allocated
                         echo "PORT IS STILL ALLOCATED, please close containers from something else"
-                        exit
+                        
                 fi
         echo -e "\nSuccessfully composed down containers. now re-composing."
         $(rm log.txt)

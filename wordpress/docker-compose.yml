@@ -2,6 +2,7 @@ version: '3'
 services:
     wordpress:
         image: wordpress:latest
+        container_name: wordpress-wordpress-1
         ports:
             - "5080:80"
         volumes:
@@ -25,7 +26,7 @@ services:
          - ./mysql:/var/lib/mysql
        networks:
          thenet:
-           ipv4_address: 10.53.1.4
+           ipv4_address: 10.53.1.3
 networks:
    thenet:
      ipam:
