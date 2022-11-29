@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  tasks:
+      - name: start container
+        command: docker compose -f '{{ playbook_dir  }}'/nginx/docker-compose.yml down
+        register: startcont
+      - name: Show Container
+        debug:
+           msg: '{{ startcont }}'
