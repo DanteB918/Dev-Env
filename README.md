@@ -1,14 +1,20 @@
-# Wordpress Locally
+# Dev-Env
 
-Bash script for a local development environment for running wordpress site locally.
+Bash script for a local development environment for running websites locally.
+
+So far, support for Wordpress & NGINX
 
 With a GUI that looks like this!
+
+![image](https://user-images.githubusercontent.com/100642899/204658614-79fdaabc-1655-4862-9953-677c16ddf172.png)
 ![image](https://user-images.githubusercontent.com/100642899/204152751-2c350f10-a509-451c-a982-ea35a5e09539.png)
+![image](https://user-images.githubusercontent.com/100642899/204658741-b8cf22d9-cb83-4a42-99ac-a25596a30693.png)
+
 
 
 ## What it does
 
-This script will allow you to run wordpress locally and easily access it. Once the bash script has started
+This script will allow you to run sites locally and easily access them. Once the bash script has started
 it will give you a GUI made with Yad, you may start/restart containers I.E compose down and then compose up. 
 
 You can check container logs which will have their own window, current containers running, as well as decompose and recompose containers at the press of a button.
@@ -27,6 +33,7 @@ Within the script there is this portion
 $(ss -tulpn | grep 5080)
 ```
 which checks to see if port 5080 is allocated.
+
 if you'd like to run your sites locally from a different port, change 5080 to that port, this will also need to be changed in the hidden ansible scripts, 
 the docker-compose.yml file with the wordpress directory, and within the bash script itself.
 
@@ -35,13 +42,13 @@ the docker-compose.yml file with the wordpress directory, and within the bash sc
 First clone the repo
 
 ```
-git clone https://github.com/DanteB918/Wordpress-locally.git
+git clone https://github.com/DanteB918/Dev-Env.git
 ```
 
 cd into the directory
 
 ```
-cd /path/to/Wordpress-locally
+cd /path/to/Dev-Env
 ```
 Afterwards,
 if needed,
@@ -54,7 +61,7 @@ chmod +x gui.sh
 This will make the scripts executable.
 
 
-To install all the needed packages simply run the .install.sh command like so,
+To install all the needed packages simply run the install.sh command like so,
 ```
 ./install.sh
 ```
