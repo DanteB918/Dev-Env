@@ -19,7 +19,7 @@ if [[ $dev == "y" ]];then
 
     sudo mkdir -p /etc/apt/keyrings
 
-        if [[ $you == "d"]];then
+        if [[ $you == "d" ]];then
         #Download for Debian
             curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
