@@ -1,6 +1,6 @@
 version: '3'
 services:
-    wordpress:
+    nginx:
         image: nginx:latest
         container_name: nginx-nginx-1
         ports:
